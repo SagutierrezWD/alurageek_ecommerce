@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Carrito</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html" style="text-decoration: none;"><h1 style="color: var(--text);">Alura<span style="color: var(--det1);">geek</span></h1></a>
+        
+        <div class="menu" id="menu">
+            <div class="search-box">
+                <input type="search" name="search-bar" id="search-bar">
+                <i class='bx bx-search' ></i>
+            </div>
+            <div class="menu-actions">
+                <a href="cart.html"><i class='bx bx-cart'></i></a>
+                <button class="btn btn1" id="btn-login">Login</button>
+            </div>
+        </div>
+        
+        <i class='bx bx-menu' id="menu-icon"></i>
+    </nav>
+
+    <main>
+        <section class="cart-products">
+            <!-- Meter Breadcum: Titulo de p'agina y cantidad de productos. Tambien tener en cuenta el HTML de cuanto no haya nada -->
+            <div class="breadcrum">
+                <h2>Carrito</h2>
+                <span>4 productos</span>
+            </div>
+            <div class="cart-product">
+                <div class="cart-product-desc">
+                    <img src="assets/image/asus.jpg" alt="">
+                    <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, quisquam? Obcaecati, maxime culpa? Illo aliquid ex, magnam recusandae consequuntur velit.</h2>
+                </div>
+                <div class="cart-product-info">
+                    <span class="cart-price">$3.500.000</span>
+                    <input type="number" name="quantity" id="quantity" class="cart-quantity" value="1" min="1">
+                    <span class="btn btn3"><i class="bx bx-trash"></i></span>
+                </div>
+            </div>
+
+            <div class="cart-product">
+                <div class="cart-product-desc">
+                    <img src="assets/image/asus.jpg" alt="">
+                    <h2>Producto 1</h2>
+                </div>
+                <div class="cart-product-info">
+                    <span class="cart-price">$3.500.000</span>
+                    <input type="number" name="quantity" id="quantity" class="cart-quantity" value="1" min="1">
+                    <span class="btn btn3"><i class="bx bx-trash"></i></span>
+                </div>
+            </div>
+
+            <div class="cart-product">
+                <div class="cart-product-desc">
+                    <img src="assets/image/asus.jpg" alt="">
+                    <h2>Producto 1</h2>
+                </div>
+                <div class="cart-product-info">
+                    <span class="cart-price">$3.500.000</span>
+                    <input type="number" name="quantity" id="quantity" class="cart-quantity" value="1" min="1">
+                    <span class="btn btn3"><i class="bx bx-trash"></i></span>
+                </div>
+            </div>
+
+            <div class="cart-product">
+                <div class="cart-product-desc">
+                    <img src="assets/image/asus.jpg" alt="">
+                    <h2>Producto 1</h2>
+                </div>
+                <div class="cart-product-info">
+                    <span class="cart-price">$3.500.000</span>
+                    <input type="number" name="quantity" id="quantity" class="cart-quantity" value="1" min="1">
+                    <span class="btn btn3"><i class="bx bx-trash"></i></span>
+                </div>
+            </div>
+
+            <div class="cart-resume">
+                <span class="cart-total"><b>TOTAL:</b> $3.500.000</span>
+                <span class="btn btn1">Comprar</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="more">
+            <div class="social">
+                <h2>Redes</h2>
+                <ul class="list-items">
+                    <li class="item-list"><a href="">Facebook</a></li>
+                    <li class="item-list"><a href="">Instagram</a></li>
+                    <li class="item-list"><a href="">Twitter</a></li>
+                </ul>
+            </div>
+
+            <div class="contacts">
+                <h2>Contactos</h2>
+                <ul class="list-items">
+                    <li class="item-list"><a href="tel:3015700310">3015700310</a></li>
+                    <li class="item-list"><a href="mailto:alurageek@gmail.com">alurageek@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <div class="about">
+                <h2>Acerca</h2>
+                <p>Somos una pagina dedicada a la venta de productos electronicos para el uso diario. Nos aseguramos de darle a nuestros clientes la mejor experiencia brindandoles servicios y garantías para su satisfacción.</p>
+            </div>
+        </div>
+
+        <div class="firm">
+            Alurageek - Copyright 2023 - Todos los derechos Reservados
+        </div>
+    </footer>
+
+    <script type="module" src="controllers/productDetail.controller.js"></script>
+</body>
+</html>
