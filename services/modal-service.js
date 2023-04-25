@@ -48,7 +48,6 @@ const modalLogin = (e) => {
                                 </div>
                             </form>`
 
-    modalStart();
     modalToggle();
 }
 

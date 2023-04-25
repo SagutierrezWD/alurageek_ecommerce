@@ -1,3 +1,4 @@
+import { formatPrice } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
 
@@ -13,7 +14,9 @@ menuIcon.onclick = () => {
 
 // Preparando modal
 window.onload = () => {
+    console.log("Si")
     modalService.modalStart();
+    ObtenerProductos();
 }; 
 
 
@@ -23,9 +26,8 @@ loginbtn.onclick = modalService.modalLogin;
 
 
 //====================================================== Logica del controlador ========================================================
-window.onload = async () => {
+    const ObtenerProductos = async () => {
     let productos = await productService.ListaProductos();
-    console.log(productos)
 
     let cardList = document.createElement("div");
     cardList.classList.add("card-list");
@@ -34,32 +36,23 @@ window.onload = async () => {
     for (let index = 0; index < productos.length; index++) {
         const producto = productos[index];
 
-        //Formato de la moneda actual (COP)
-        let formato = new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0
-        })
-
         //Valores que se pintaran en el card, solo son algunos del total de datos que se pintaran
         let descontado = 0;
-        let precio = formato.format(producto.precio);
+        let precio = formatPrice(producto.precio);
         let precioAnterior = 0;
         let descuento = "";
-        let productoSinDescuento = "price-centered"
+
+        let productoSinDescuento = "price-centered" //Esto es para aplicar un estilo en cierto caso
 
         if(producto.descuento > 0 && producto.descuento < 99){
-            precioAnterior = formato.format(producto.precio);
+            precioAnterior = formatPrice(producto.precio);
             descontado = (producto.precio * producto.descuento) / 100;
-            precio = formato.format(producto.precio - descontado);
-            console.log("descuento")
+            precio = formatPrice(producto.precio - descontado);
             descuento = producto.descuento + "% OFF";
             productoSinDescuento = "";        
         }else{
             precioAnterior = "";
         }
-
-        console.log(precio);
 
         let productHTML = `<div class="card">
                                 <h3 class="card-title">${producto.nombre}</h3>
@@ -77,67 +70,8 @@ window.onload = async () => {
         cardList.innerHTML = cardList.innerHTML + productHTML;
     }
 
+    //Removiendo imagen de carga y agregando cards
     let productList = document.getElementById("products");
     productList.removeChild(document.getElementById("load-image"));
-    console.log(cardList)
     productList.appendChild(cardList);
 }
-
-
-// Simulando productos cargando, método solo temporal y de prueba
-// let productList = document.getElementById("products");
-// setTimeout(() => {
-//     productList.innerHTML = `<div class="card-list">
-//     <div class="card">
-//         <h3 class="card-title">Producto 1</h3>
-
-//         <img src="assets/image/asus.jpg" alt="" class="card-image">
-
-//         <div class="card-pricing">
-//             <span class="price-disc">$5.200.000</span>
-//             <span class="price">$3.500.000 <span class="disc-per">15% OFF</span></span>
-//         </div>
-        
-//         <a class="btn btn2 btn-link" href="producto.html">Ver más</a>
-//     </div>
-
-//     <div class="card">
-//         <h3 class="card-title">Producto 2</h3>
-
-//         <img src="assets/image/asus.jpg" alt="" class="card-image">
-
-//         <div class="card-pricing">
-//             <span class="price-disc">$5.200.000</span>
-//             <span class="price">$3.500.000 <span class="disc-per">15% OFF</span></span>
-//         </div>
-        
-//         <a class="btn btn2 btn-link" href="producto.html">Ver más</a>
-//     </div>
-
-//     <div class="card">
-//         <h3 class="card-title">Producto 3</h3>
-
-//         <img src="assets/image/asus.jpg" alt="" class="card-image">
-
-//         <div class="card-pricing">
-//             <span class="price-disc">$5.200.000</span>
-//             <span class="price">$3.500.000 <span class="disc-per">15% OFF</span></span>
-//         </div>
-        
-//         <a class="btn btn2 btn-link" href="producto.html">Ver más</a>
-//     </div>
-
-//     <div class="card">
-//         <h3 class="card-title">Producto 4</h3>
-
-//         <img src="assets/image/asus.jpg" alt="" class="card-image">
-
-//         <div class="card-pricing">
-//             <span class="price-disc">$5.200.000</span>
-//             <span class="price">$3.500.000 <span class="disc-per">15% OFF</span></span>
-//         </div>
-        
-//         <a class="btn btn2 btn-link" href="producto.html">Ver más</a>
-//     </div>
-// </div>`
-// }, 2000);
