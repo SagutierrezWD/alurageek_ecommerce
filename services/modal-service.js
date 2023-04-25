@@ -23,7 +23,6 @@ const modalStart = () => {
 
     // Agregando modal al body
     body[0].appendChild(modalContainer);
-    console.log(cookieService.getCookie("ag_user_id"))
 }
 
 

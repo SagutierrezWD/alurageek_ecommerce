@@ -1,6 +1,7 @@
 import { formatPrice } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
+import { securityService } from "../services/security-service.js";
 
 
 //====================================================== Configuracion básica ========================================================
@@ -12,22 +13,19 @@ menuIcon.onclick = () => {
 }
 
 
-// Preparando modal
 window.onload = () => {
+    //Verificando cuenta
+    securityService.verificarCuenta();
+
+    // Preparando modal
     modalService.modalStart();
+
+    //Obteniendo detalles del producto seleccionado
+    ProductoSeleccionado();
 }; 
 
 
-// Boton del login para abrir modal
-let loginbtn = document.getElementById("btn-login");
-loginbtn.onclick = modalService.modalLogin;
-
-
 //====================================================== Logica del controlador ========================================================
-window.onload = async () => {
-    ProductoSeleccionado();
-}
-
 const ProductoSeleccionado = async () => {
     //Obteniendo ID de la URL
     let url = new URL(window.location);
