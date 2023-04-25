@@ -120,5 +120,28 @@
       "precio":4800000,
       "descuento":20
     }
+  ],
+  "usuarios": [
+    {
+      "id":1,
+      "nombre":"Diego",
+      "rol":2,
+      "user":"diego0205",
+      "pass":"diego200223"
+    },
+    {
+      "id":2,
+      "nombre":"Juan",
+      "rol":2,
+      "user":"juan23",
+      "pass":"090376juan23"
+    },
+    {
+      "id":3,
+      "nombre":"Admin",
+      "rol":1,
+      "user":"aguser",
+      "pass":"ag12345"
+    }
   ]
 }

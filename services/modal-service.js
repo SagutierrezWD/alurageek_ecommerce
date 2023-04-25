@@ -1,3 +1,5 @@
+import { loginService } from "./login-service.js";
+
 // Funcion para preparar modal
 const modalStart = () => {
     // Obteniendo el body
@@ -27,7 +29,7 @@ const modalStart = () => {
 const modalLogin = (e) => {
     e.preventDefault();
     let modalBody = document.getElementById("modal-body");
-    modalBody.innerHTML = `<form action="">
+    modalBody.innerHTML = `<form action="" id="formLogin">
                                 <div class="form-head">
                                     <h2>Iniciar sesion</h2>
                                     <span class="close-icon" id="btn-close"><i class="bx bx-x"></i></span>
@@ -49,6 +51,34 @@ const modalLogin = (e) => {
                             </form>`
 
     modalToggle();
+
+    
+    // Agregando método para el formulario del login
+    formLogin.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const data = await loginService.iniciarSesion(document.querySelector("#usuario").value)
+
+        let userFinded = false;
+
+        for (let index = 0; index < data.length; index++) {
+            const usuario = data[index];
+            if(document.querySelector("#contraseña").value == usuario.pass){
+                userFinded = true;
+                alert("Ha iniciado sesion");
+                setCookie("ag_user_id", usuario.id, 365);
+                setCookie("ag_user_role", usuario.rol, 365);
+                window.location = "index.html"
+                break
+            }
+        }
+
+        if(userFinded == false)
+        {
+            alert("Usuario o contraseña incorrecto")
+        }
+        
+    })
 }
 
 const modalProductAdd = (e) => {
@@ -131,6 +161,26 @@ function modalToggle(){
     closebtn.onclick = modalLogin;
     let modal = document.getElementById("modal-container");
     modal.classList.toggle("toggle-modal");
+}
+
+function setCookie(name, value, daysToExpire){
+    const date = new Date();
+    date.setDate(date.getDate() + (daysToExpire * 24 * 60 * 60 * 1000))
+    let expires = "expires="+date.toUTCString();
+    document.cookie = `${name}=${value}; ${expires}; path=/;`
+}
+
+function getCookie(name){
+    const cookieDecode = decodeURIComponent(document.cookie);
+    const cookieArray = cookieDecode.split("; ");
+    let result = null;
+
+    cookieArray.forEach(element => {
+        if(element.indexOf(name) == 0){
+            result = element.substring(name.length + 1)
+        }
+    })
+    return result;
 }
 
 export const modalService = {
