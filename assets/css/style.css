@@ -291,7 +291,7 @@ nav  i
 {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
     flex-wrap: wrap;
     width: 90%;
 }
@@ -321,8 +321,15 @@ nav  i
 .card-pricing
 {
     display: flex;
+    width: 80%;
+    align-items: flex-start;
     flex-direction: column;
-    margin: 20px 0 20px 20px;
+    /* margin: 20px 0 20px 20px; */
+    margin: 20px auto;
+}
+.card-pricing.price-centered
+{
+    align-items: center;
 }
 .price-disc
 {
@@ -331,6 +338,14 @@ nav  i
     margin-bottom: 5px;
     color: var(--textLight);
     font-weight: lighter;
+}
+.card .card-pricing .price, .card .card-pricing .price-disc
+{
+    margin-left: 10%;
+}
+.card .card-pricing.price-centered .price
+{
+    margin-left: unset;
 }
 .disc-per
 {
@@ -698,6 +713,13 @@ body:has(.container-modal.toggle-modal) main
         justify-content: space-evenly;
     }
     /* Info ends */
+
+    /* Card */
+    .card .card-pricing .price, .card .card-pricing .price-disc
+    {
+        margin-left: 15%;
+    }
+    /* Card ends */
 
     /* Footer */
     .more
