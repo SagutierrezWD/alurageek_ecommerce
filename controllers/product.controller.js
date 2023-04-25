@@ -14,7 +14,6 @@ menuIcon.onclick = () => {
 
 // Preparando modal
 window.onload = () => {
-    console.log("Si")
     modalService.modalStart();
     ObtenerProductos();
 }; 
