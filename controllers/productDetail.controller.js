@@ -41,7 +41,7 @@ const ProductoSeleccionado = async () => {
     let {precio, precioAnterior, descuento} = productPrice;
     
     let productHTML = `<div class="product-img">
-                            <img src="assets/image/asus.jpg" alt="">
+                            <img src="assets/image/${productoSel.imagen}" alt="">
                         </div>
                         <div class="product-details">
                             <h2>${productoSel.nombre}</h2>
@@ -58,16 +58,18 @@ const ProductoSeleccionado = async () => {
                                     <a class="btn-link btn btn1" href="">Comprar</a>
                                     <a class="btn-link btn btn2" href="">Añadir al carrito</a>
                                 </div>
-                                </div>
-                                    
+
+                                <div class="cart-product-info">
                                     <div class="icon-info">
-                                    <div class="icon">
-                                    <i class="bx bx-car"></i>
-                                    <span>Envio gratis</span>
-                                </div>
-                                <div class="icon">
-                                    <i class="bx bx-package"></i>
-                                    <span>Reembolso en 30 días</span>
+                                        <div class="icon">
+                                            <i class="bx bx-car"></i>
+                                            <span>Envio gratis</span>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="bx bx-package"></i>
+                                            <span>Reembolso en 30 días</span>
+                                        </div>
+                                    </div>    
                                 </div>
                             </div>
                         </div>`;

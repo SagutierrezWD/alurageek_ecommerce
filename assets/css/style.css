@@ -156,11 +156,13 @@ nav  i
 {
     color: white;
     background-color: var(--bgAlt);
+    border: 2px solid var(--bgAlt);
     align-self: center;
 }
 .btn1:hover
 {
     background-color: var(--bg3);
+    border: 2px solid var(--bg3);
 }
 .btn-link
 {
@@ -411,6 +413,7 @@ footer
 {
     display: flex;
     justify-content: center;
+    margin: 15px 0;
 }
 .product-img img
 {
@@ -421,6 +424,10 @@ footer
 .product-details
 {
     width: 90%;
+}
+.product-details h2
+{
+    margin-bottom: 10px;
 }
 .product-pricing
 {
@@ -434,6 +441,11 @@ footer
 .product-pricing .price
 {
     margin-top: -15px;
+    font-size: 24px;
+}
+.product-pricing .price-disc
+{
+    font-size: 18px;
 }
 .product-pricing .price, .product-pricing .price-disc
 {
@@ -442,6 +454,12 @@ footer
 .button-actions .btn-link .btn
 {
     margin-bottom: 15px;
+}
+.button-actions .btn-link
+{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
 }
 .icon
 {
@@ -830,6 +848,10 @@ body:has(.container-modal.toggle-modal) main
         width:45%;
     }
 
+    .button-actions .btn-link
+    {
+        display: inline;
+    }
 
     /* Cart page */
     .cart-products
