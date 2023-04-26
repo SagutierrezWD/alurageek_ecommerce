@@ -1,4 +1,4 @@
-import { formatPrice } from "../services/formatPrice-service.js";
+import { priceService } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
 import { securityService } from "../services/security-service.js";
@@ -36,25 +36,14 @@ const ProductoSeleccionado = async () => {
     let productoSel = productos.find(producto => producto.id == id);
     
     
-    //Valores que se pintaran en el card, solo son algunos del total de datos que se pintaran
-    let descontado = "";
-    let precio = formatPrice(productoSel.precio);
-    let precioAnterior = 0;
-    let descuento = "";
-    
-    if(productoSel.descuento > 0 && productoSel.descuento < 99){
-        precioAnterior = formatPrice(productoSel.precio);
-        descontado = (productoSel.precio * productoSel.descuento) / 100;
-        precio = formatPrice(productoSel.precio - descontado);
-        descuento = productoSel.descuento + "% OFF";     
-    }else{
-        precioAnterior = "";
-    }
+    let productPrice = priceService.priceValueManager(productoSel);
+
+    let {precio, precioAnterior, descuento} = productPrice;
     
     let productHTML = `<div class="product-img">
-    <img src="assets/image/asus.jpg" alt="">
-    </div>
-    <div class="product-details">
+                            <img src="assets/image/asus.jpg" alt="">
+                        </div>
+                        <div class="product-details">
                             <h2>${productoSel.nombre}</h2>
                             
                             <div class="product-desc">
@@ -63,13 +52,13 @@ const ProductoSeleccionado = async () => {
                                 <div class="product-pricing">
                                     <span class="price-disc">${precioAnterior}</span>
                                     <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
-                                    </div>
+                                </div>
                                     
-                                    <div class="button-actions">
+                                <div class="button-actions">
                                     <a class="btn-link btn btn1" href="">Comprar</a>
                                     <a class="btn-link btn btn2" href="">Añadir al carrito</a>
-                                    </div>
-                                    </div>
+                                </div>
+                                </div>
                                     
                                     <div class="icon-info">
                                     <div class="icon">
@@ -80,8 +69,8 @@ const ProductoSeleccionado = async () => {
                                     <i class="bx bx-package"></i>
                                     <span>Reembolso en 30 días</span>
                                 </div>
-                                </div>
-                                </div>`;
+                            </div>
+                        </div>`;
                                 
     let productInfo = document.getElementById("product-info");
     productInfo.removeChild(document.getElementById("load-image"));
@@ -100,27 +89,16 @@ const ProductosExtra =  (productos, tipoSel) => {
 
         const producto = productos[index];
 
-        //Valores que se pintaran en el card, solo son algunos del total de datos que se pintaran
-        let descontado = "";
-        let precio = formatPrice(producto.precio);
-        let precioAnterior = 0;
-        let descuento = "";
-        
-        if(producto.descuento > 0 && producto.descuento < 99){
-            precioAnterior = formatPrice(producto.precio);
-            descontado = (producto.precio * producto.descuento) / 100;
-            precio = formatPrice(producto.precio - descontado);
-            descuento = producto.descuento + "% OFF";     
-        }else{
-            precioAnterior = "";
-        }
+        let productPrice = priceService.priceValueManager(producto);
+
+        let {precio, precioAnterior, descuento, estiloProductoSinDescuento} = productPrice;
         
         let card = `<div class="card">
                         <h3 class="card-title">${producto.nombre}</h3>
 
                         <img src="assets/image/${producto.imagen}" alt="Imagen del producto: ${producto.nombre}" class="card-image">
 
-                        <div class="card-pricing">
+                        <div class="card-pricing ${estiloProductoSinDescuento}">
                             <span class="price-disc">${precioAnterior}</span>
                             <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
                         </div>

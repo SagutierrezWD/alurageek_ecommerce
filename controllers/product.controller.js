@@ -1,4 +1,4 @@
-import { formatPrice } from "../services/formatPrice-service.js";
+import { priceService } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
 import { securityService } from "../services/security-service.js";
@@ -35,30 +35,16 @@ const ObtenerProductos = async () => {
     for (let index = 0; index < productos.length; index++) {
         const producto = productos[index];
 
-        //Valores que se pintaran en el card, solo son algunos del total de datos que se pintaran
-        let descontado = 0;
-        let precio = formatPrice(producto.precio);
-        let precioAnterior = 0;
-        let descuento = "";
+        let productPrice = priceService.priceValueManager(producto);
 
-        let productoSinDescuento = "price-centered" //Esto es para aplicar un estilo en cierto caso
-
-        if(producto.descuento > 0 && producto.descuento < 99){
-            precioAnterior = formatPrice(producto.precio);
-            descontado = (producto.precio * producto.descuento) / 100;
-            precio = formatPrice(producto.precio - descontado);
-            descuento = producto.descuento + "% OFF";
-            productoSinDescuento = "";        
-        }else{
-            precioAnterior = "";
-        }
+        let {precio, precioAnterior, descuento, estiloProductoSinDescuento} = productPrice;
 
         let productHTML = `<div class="card">
                                 <h3 class="card-title">${producto.nombre}</h3>
 
                                 <img src="assets/image/${producto.imagen}" alt="Imagen del equipo: ${producto.nombre}" class="card-image">
 
-                                <div class="card-pricing ${productoSinDescuento}">
+                                <div class="card-pricing ${estiloProductoSinDescuento}">
                                     <span class="price-disc">${precioAnterior}</span>
                                     <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
                                 </div>
