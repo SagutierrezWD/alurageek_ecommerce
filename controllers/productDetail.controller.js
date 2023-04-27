@@ -1,3 +1,5 @@
+import { cartService } from "../services/cart-service.js";
+import { cookieService } from "../services/cookie-service.js";
 import { priceService } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
@@ -56,7 +58,7 @@ const ProductoSeleccionado = async () => {
                                 
                                 <div class="button-actions">
                                     <a class="btn-link btn btn1" href="">Comprar</a>
-                                    <a class="btn-link btn btn2" href="">Añadir al carrito</a>
+                                    <a class="btn-link btn btn2" href="" id="btn-cart"">Añadir al carrito</a>
                                     </div>
                                     
                                     <div class="cart-product-info">
@@ -78,6 +80,32 @@ const ProductoSeleccionado = async () => {
     let productInfo = document.getElementById("product-info");
     productInfo.removeChild(document.getElementById("load-image"));
     productInfo.innerHTML = productHTML;
+
+    //Añadiendo métodos a los botones de la pagina de productos
+    let btnCart = document.getElementById("btn-cart");
+    btnCart.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let userId = cookieService.getCookie("ag_user_id");
+        let verificarCuenta = securityService.verificarId()
+
+        verificarCuenta.then(data => {
+            if(data == false || data == undefined && data !== null){
+                if(userId !== null){
+                    return alert("La ID de la cuenta actual no coincide con la de alguna cuenta registrada, vuelva a iniciar sesion")
+                }else{
+                    return alert("Inicia sesion para poder añadir productos al carrito")
+                }
+            }
+
+            if(data[0].id == undefined){
+
+            }else{
+                cartService.agregarAlCarrito(id)
+            }
+        })
+        
+    })
 
     //Para pintar la seccion 'Tambien te puede interesar' de la pagina de detalles del producto
     ProductosExtra(productos, productoSel.tipo);

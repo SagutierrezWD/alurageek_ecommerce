@@ -1,3 +1,4 @@
+import { cookieService } from "../services/cookie-service.js";
 import { priceService } from "../services/formatPrice-service.js";
 import { modalService } from "../services/modal-service.js";
 import { productService } from "../services/product-service.js";
@@ -22,6 +23,7 @@ window.onload = () => {
 
     //Obteniendo productos
     ObtenerProductos();
+    console.log(cookieService.getCookie("ag_carrito_productos"))
 }; 
 
 //====================================================== Logica del controlador ========================================================
