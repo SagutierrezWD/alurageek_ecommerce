@@ -1,7 +1,12 @@
 import { cookieService } from "./cookie-service.js";
 
 
-const agregarAlCarrito = async (id) => {
+const agregarAlCarrito = async (id, lanzarAlertas) => {
+    //Verificar si se quiere lanzar alertas
+    if(lanzarAlertas == undefined || lanzarAlertas == false){
+        lanzarAlertas = false;
+    }
+    
     //Obtener los productos ya agregados al carrito, si los hay
     let productosEnCarrito = cookieService.getCookie("ag_carrito_productos");
         
@@ -14,8 +19,12 @@ const agregarAlCarrito = async (id) => {
         productoLista = productosEnCarrito.split(",")
         
         //Verificando si el producto ya esta agregado
-        if(productoLista.includes(id) == true){
+        if(productoLista.includes(id) == true && lanzarAlertas == true){
             return alert("Este producto ya esta agregado en tu carrito")
+        }else{
+            if(productoLista.includes(id) == true){
+                return;
+            }
         }
         
         //Volviendo a unir el listado de productos en un string para luego agregar el id
@@ -25,7 +34,9 @@ const agregarAlCarrito = async (id) => {
     
     //Agregando productos al carrito
     cookieService.setCookie("ag_carrito_productos", productoLista, 365);
-    alert("Producto agregado!")
+    if(lanzarAlertas == true){
+        alert("Producto agregado!")
+    }
 }
 
 export const cartService = {

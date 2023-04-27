@@ -57,8 +57,8 @@ const ProductoSeleccionado = async () => {
                                 </div>
                                 
                                 <div class="button-actions">
-                                    <a class="btn-link btn btn1" href="">Comprar</a>
-                                    <a class="btn-link btn btn2" href="" id="btn-cart"">Añadir al carrito</a>
+                                    <button class="btn-link btn btn1" id="btn-comprar">Comprar</button>
+                                    <button class="btn-link btn btn2" id="btn-cart">Añadir al carrito</button>
                                     </div>
                                     
                                     <div class="cart-product-info">
@@ -81,17 +81,17 @@ const ProductoSeleccionado = async () => {
     productInfo.removeChild(document.getElementById("load-image"));
     productInfo.innerHTML = productHTML;
 
-    //Añadiendo métodos a los botones de la pagina de productos
+    //Añadiendo método de 'añadir al carrito' al boton 
     let btnCart = document.getElementById("btn-cart");
     btnCart.addEventListener("click", (e) => {
         e.preventDefault();
 
         let userId = cookieService.getCookie("ag_user_id");
         let verificarCuenta = securityService.verificarId()
-
+        
         verificarCuenta.then(data => {
-            if(data == false || data == undefined && data !== null){
-                if(userId !== null){
+            if(data == false || data == undefined){
+                if(userId !== null || userId !== undefined){
                     return alert("La ID de la cuenta actual no coincide con la de alguna cuenta registrada, vuelva a iniciar sesion")
                 }else{
                     return alert("Inicia sesion para poder añadir productos al carrito")
@@ -101,10 +101,35 @@ const ProductoSeleccionado = async () => {
             if(data[0].id == undefined){
 
             }else{
-                cartService.agregarAlCarrito(id)
+                cartService.agregarAlCarrito(id, true)
             }
         })
         
+    })
+
+    //Añadiendo método de 'comprar producto' al boton
+    let btnComprar = document.getElementById("btn-comprar")
+    btnComprar.addEventListener("click", () => {
+        
+        let userId = cookieService.getCookie("ag_user_id");
+        let verificarCuenta = securityService.verificarId()
+        
+        verificarCuenta.then(data => {
+            if(data == false || data == undefined){
+                if(userId !== null || userId !== undefined){
+                    return alert("La ID de la cuenta actual no coincide con la de alguna cuenta registrada, vuelva a iniciar sesion")
+                }else{
+                    return alert("Inicia sesion para poder añadir productos al carrito")
+                }
+            }
+
+            if(data[0].id == undefined){
+
+            }else{
+                cartService.agregarAlCarrito(id, false)
+                window.location = "cart.html"
+            }
+        })
     })
 
     //Para pintar la seccion 'Tambien te puede interesar' de la pagina de detalles del producto

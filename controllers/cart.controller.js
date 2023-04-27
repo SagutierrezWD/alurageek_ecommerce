@@ -1,3 +1,4 @@
+import { cookieService } from "../services/cookie-service.js";
 import { modalService } from "../services/modal-service.js";
 import { securityService } from "../services/security-service.js";
 
@@ -17,5 +18,6 @@ window.onload = () => {
 
     // Preparando modal
     modalService.modalStart();
+    console.log(cookieService.getCookie("ag_carrito_productos"))
 }; 
 

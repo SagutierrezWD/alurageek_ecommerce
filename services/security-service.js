@@ -47,7 +47,7 @@ const verificarSesionDeCuenta = async (incluirVerificacionDeRol) => {
 }
 
 const cerrarSesion = (mensaje) => {
-    if(mensaje !== "" || mensaje !== null || mensaje !== undefined){
+    if(mensaje !== undefined){
         alert(mensaje)
     }
 
@@ -60,7 +60,7 @@ const cerrarSesion = (mensaje) => {
 }
 
 //Este método verifica si la id indicada
-const verificarId = () => fetch(url+controller+"?id="+userId).then(response => response.json()).catch(err => console.error(err));
+const verificarId = () => fetch(url+controller+"?id="+userId).then(response => response.json()).catch(err => console.log(err));
 
 
 export const securityService = {
