@@ -108,13 +108,13 @@ const ProductoSeleccionado = async () => {
     })
 
     //Para pintar la seccion 'Tambien te puede interesar' de la pagina de detalles del producto
-    ProductosExtra(productos, productoSel.tipo);
+    ProductosExtra(productos, productoSel.tipo, id);
 }
 
-const ProductosExtra =  (productos, tipoSel) => {
+const ProductosExtra =  (productos, tipoSel, id) => {
 
     for (let index = 0; index < productos.length; index++) {
-        if(productos[index].tipo !== tipoSel){
+        if(productos[index].tipo !== tipoSel || productos[index].id == id){
             continue
         }
 
@@ -134,7 +134,7 @@ const ProductosExtra =  (productos, tipoSel) => {
                             <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
                         </div>
                         
-                        <a class="btn btn2 btn-link" href="producto.html">Ver más</a>
+                        <a class="btn btn2 btn-link" href="producto.html?id=${producto.id}">Ver más</a>
                     </div>`
 
         let cardList = document.getElementById("card-list");
