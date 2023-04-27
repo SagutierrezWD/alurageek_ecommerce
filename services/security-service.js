@@ -6,7 +6,7 @@ const url = "http://localhost:3000/";
 const controller = "usuarios";
 const userId = cookieService.getCookie("ag_user_id");
 
-const verificarCuenta = async (incluirVerificacionDeRol) => {
+const verificarSesionDeCuenta = async (incluirVerificacionDeRol) => {
     const data = await fetch(url+controller+"?id="+userId).then((response) => response.json()).catch(err => console.error(err))
 
     if(data[0] === undefined && userId == undefined ){
@@ -29,9 +29,9 @@ const verificarCuenta = async (incluirVerificacionDeRol) => {
             // console.log("Cuenta ingresada verificada")
 
             //Verificar si el usuario puede acceder o no a caracteristicas de administrador, solo si se requiere verificar
-            if(incluirVerificacionDeRol === true && data[0].rol === 1){
+            // if(incluirVerificacionDeRol === true && data[0].rol === 1){
                 // console.log("Rol de cuenta verificado, puede agregar y editar productos")
-            }
+            // }
 
             //Controlar que si se requiere verificar el rol, la cuenta tenga ese rol, sino mandara alerta
             if(incluirVerificacionDeRol === true && data[0].rol !== 1)
@@ -41,10 +41,30 @@ const verificarCuenta = async (incluirVerificacionDeRol) => {
         }else{
             //Cuenta que inicio sesion tiene una ID no identificada
             // console.log("Cuenta ingresada no verificada")
+            cerrarSesion("La cuenta tiene una ID no identificada, vuelva a iniciar sesion")
         }
     }
 }
 
+const cerrarSesion = (mensaje) => {
+    if(mensaje !== "" || mensaje !== null || mensaje !== undefined){
+        alert(mensaje)
+    }
+
+    cookieService.deleteCookie("ag_user_id");
+    cookieService.deleteCookie("ag_user_id");
+
+    cookieService.deleteCookie("ag_carrito_productos");
+
+    window.location = "index.html"
+}
+
+//Este método verifica si la id indicada
+const verificarId = () => fetch(url+controller+"?id="+userId).then(response => response.json()).catch(err => console.error(err));
+
+
 export const securityService = {
-    verificarCuenta,
+    verificarSesionDeCuenta,
+    verificarId,
+    cerrarSesion
 }

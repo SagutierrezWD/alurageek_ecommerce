@@ -15,7 +15,7 @@ menuIcon.onclick = () => {
 
 window.onload = () => {
     //Verificando cuenta
-    securityService.verificarCuenta();
+    securityService.verificarSesionDeCuenta();
 
     // Preparando modal
     modalService.modalStart();
@@ -30,9 +30,9 @@ const ProductoSeleccionado = async () => {
     //Obteniendo ID de la URL
     let url = new URL(window.location);
     let id = url.searchParams.get("id");
-
+    
     let productos = await productService.ListaProductos();
-
+    
     let productoSel = productos.find(producto => producto.id == id);
     
     
@@ -41,8 +41,8 @@ const ProductoSeleccionado = async () => {
     let {precio, precioAnterior, descuento} = productPrice;
     
     let productHTML = `<div class="product-img">
-                            <img src="assets/image/${productoSel.imagen}" alt="">
-                        </div>
+    <img src="assets/image/${productoSel.imagen}" alt="">
+    </div>
                         <div class="product-details">
                             <h2>${productoSel.nombre}</h2>
                             
@@ -50,30 +50,31 @@ const ProductoSeleccionado = async () => {
                                 <p>${productoSel.descripcion}</p>
                                 
                                 <div class="product-pricing">
-                                    <span class="price-disc">${precioAnterior}</span>
-                                    <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
+                                <span class="price-disc">${precioAnterior}</span>
+                                <span class="price">${precio} <span class="disc-per">${descuento}</span></span>
                                 </div>
-                                    
+                                
                                 <div class="button-actions">
                                     <a class="btn-link btn btn1" href="">Comprar</a>
                                     <a class="btn-link btn btn2" href="">Añadir al carrito</a>
-                                </div>
-
-                                <div class="cart-product-info">
+                                    </div>
+                                    
+                                    <div class="cart-product-info">
                                     <div class="icon-info">
                                         <div class="icon">
-                                            <i class="bx bx-car"></i>
+                                        <i class="bx bx-car"></i>
                                             <span>Envio gratis</span>
                                         </div>
                                         <div class="icon">
                                             <i class="bx bx-package"></i>
                                             <span>Reembolso en 30 días</span>
                                         </div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>`;
+                                        </div>    
+                                        </div>
+                                        </div>
+                                        </div>`;
                                 
+    //Removiendo imagen de carga
     let productInfo = document.getElementById("product-info");
     productInfo.removeChild(document.getElementById("load-image"));
     productInfo.innerHTML = productHTML;

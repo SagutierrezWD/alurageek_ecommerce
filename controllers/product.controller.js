@@ -15,7 +15,7 @@ menuIcon.onclick = () => {
 
 window.onload = () => {
     //Verificando cuenta
-    securityService.verificarCuenta();
+    securityService.verificarSesionDeCuenta();
     
     // Preparando modal
     modalService.modalStart();
