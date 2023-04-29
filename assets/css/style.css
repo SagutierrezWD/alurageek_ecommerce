@@ -500,6 +500,12 @@ footer
     height: auto;
     min-height: 75dvh;
 }
+.cart-products.centered
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .breadcrum
 {
     width: 100%;

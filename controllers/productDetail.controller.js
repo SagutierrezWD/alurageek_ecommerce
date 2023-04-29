@@ -91,7 +91,7 @@ const ProductoSeleccionado = async () => {
         
         verificarCuenta.then(data => {
             if(data == false || data == undefined){
-                if(userId !== null || userId !== undefined){
+                if(userId === "" && data.length !== 0){
                     return alert("La ID de la cuenta actual no coincide con la de alguna cuenta registrada, vuelva a iniciar sesion")
                 }else{
                     return alert("Inicia sesion para poder añadir productos al carrito")
@@ -113,10 +113,9 @@ const ProductoSeleccionado = async () => {
         
         let userId = cookieService.getCookie("ag_user_id");
         let verificarCuenta = securityService.verificarId()
-        
         verificarCuenta.then(data => {
             if(data == false || data == undefined){
-                if(userId !== null || userId !== undefined){
+                if(userId === "" && data.length !== 0){
                     return alert("La ID de la cuenta actual no coincide con la de alguna cuenta registrada, vuelva a iniciar sesion")
                 }else{
                     return alert("Inicia sesion para poder añadir productos al carrito")

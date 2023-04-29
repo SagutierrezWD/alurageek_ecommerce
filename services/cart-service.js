@@ -13,7 +13,7 @@ const agregarAlCarrito = async (id, lanzarAlertas) => {
     let productoLista;//Esta variable almacenara el listado de productos
     
     //Verificar si hay o no productos en el carrito
-    if(productosEnCarrito == null && typeof(productosEnCarrito) !== String){
+    if(productosEnCarrito == undefined || productosEnCarrito == "" || productosEnCarrito == null){
         productoLista = id;
     }else{
         productoLista = productosEnCarrito.split(",")
@@ -39,6 +39,18 @@ const agregarAlCarrito = async (id, lanzarAlertas) => {
     }
 }
 
+const obtenerProductos = () => {
+    const data = cookieService.getCookie("ag_carrito_productos");
+    
+    if(data !== null){
+        let idProductos = data.split(",");
+        return idProductos;
+    }else{
+        return null;
+    }
+}
+
 export const cartService = {
     agregarAlCarrito,
+    obtenerProductos,
 }
