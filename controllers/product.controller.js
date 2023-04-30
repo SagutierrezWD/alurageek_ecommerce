@@ -46,7 +46,7 @@ const ObtenerProductos = async () => {
         let productHTML = `<div class="card">
                                 <h3 class="card-title">${producto.nombre}</h3>
 
-                                <img src="assets/image/${producto.imagen}" alt="Imagen del equipo: ${producto.nombre}" class="card-image">
+                                <img src="assets/image/${producto.imagen}" alt="Imagen del equipo: ${producto.nombre}" class="card-image" id="img-${producto.id}">
 
                                 <div class="card-pricing ${estiloProductoSinDescuento}">
                                     <span class="price-disc">${precioAnterior}</span>
@@ -79,16 +79,21 @@ const ObtenerProductos = async () => {
             document.querySelector("#btn-edit-"+idProd).addEventListener("click", (e) => {
                 modalService.modalProductEdit(e, productos[index])
             })
-
+            
             document.querySelector("#btn-del-"+idProd).addEventListener("click", (e) => {
                 e.preventDefault()
                 let del = confirm("¿Estas seguro de que quieres eliminar este producto?")
-
+                
                 if(del == true){
                     productService.eliminarProducto(idProd).then(response => {
                         alert("Producto eliminado")
                     })
                 }
+            })
+            
+            //Controlando imagenes que fallan
+            document.querySelector("#img-"+idProd).addEventListener("error", (e) => {
+                e.target.setAttribute("src", "assets/image/not-found.png")
             })
         }
     }

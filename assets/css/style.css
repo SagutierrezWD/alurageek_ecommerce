@@ -190,6 +190,7 @@ nav  i
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 /* Button ends */
 
@@ -198,7 +199,7 @@ nav  i
 {
     /* margin-top: var(--navH); */
     padding: 20px;
-    background-image: url(../image/young\ people\ on\ computer.jpg);
+    background-image: url(../image/hero.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -221,7 +222,7 @@ nav  i
     margin: 25px 0 30px 0;
     font-size: 20px;
     width: 70%;
-    color: var(--textAlt);
+    color: var(--textLight);
 }
 
 .hero-meet button
@@ -573,6 +574,11 @@ footer
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
+}
+button[delid]{
+    border: none;
+    background-color: var(--bg2);
+    padding: 5px;
 }
 .cart-resume
 {
