@@ -279,6 +279,14 @@ nav  i
 }
 /* Banner ends */
 
+/* Add product */
+.add-product
+{
+    width: 90%;
+    margin-bottom: 20px;
+}
+/*  */
+
 /* Product */
 .products
 {
@@ -608,6 +616,7 @@ footer
     border: none;
     border-bottom: 1px solid var(--det1);
     outline: none;
+    padding-bottom: 5px;
 }
 label
 {
@@ -669,7 +678,6 @@ body:has(.container-modal.toggle-modal) #btn-modal
 
 body:has(.container-modal.toggle-modal)
 {
-    background-color: red;
     overflow: hidden;
 }
 

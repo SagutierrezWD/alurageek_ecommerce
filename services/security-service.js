@@ -9,6 +9,7 @@ const userId = cookieService.getCookie("ag_user_id");
 const verificarSesionDeCuenta = async (incluirVerificacionDeRol) => {
     const data = await fetch(url+controller+"?id="+userId).then((response) => response.json()).catch(err => console.error(err))
 
+    let menuActions = document.querySelector(".menu-actions");
     if(data[0] === undefined && userId == undefined ){
         //Ninguna cuenta ha iniciado sesion
         // console.log("Cuenta no ingresada")
@@ -18,20 +19,44 @@ const verificarSesionDeCuenta = async (incluirVerificacionDeRol) => {
         btnLogin.classList.add("btn", "btn1");
         btnLogin.id = "btn-login";
         btnLogin.textContent = "Login";
-        btnLogin.onclick = modalService.modalLogin;
+
+        btnLogin.addEventListener("click", (e) => {
+            modalService.modalLogin(e);
+        })  
 
         //Agregando boton de login
-        let menuActions = document.querySelector(".menu-actions");
         menuActions.appendChild(btnLogin);
     }else{
         if(data[0] !== undefined){
             //Cuenta ingresada que tiene una ID que si coincide con una cuenta registrada
             // console.log("Cuenta ingresada verificada")
 
+            // Boton de cerrar sesion
+            let btnSalir = document.createElement("button");
+            btnSalir.classList.add("btn", "btn1");
+            btnSalir.id = "btn-logout";
+            btnSalir.textContent = "Cerrar sesion";
+
+            btnSalir.addEventListener("click", () => {
+                securityService.cerrarSesion()
+            })  
+
+            menuActions.appendChild(btnSalir)
+
             //Verificar si el usuario puede acceder o no a caracteristicas de administrador, solo si se requiere verificar
-            // if(incluirVerificacionDeRol === true && data[0].rol === 1){
-                // console.log("Rol de cuenta verificado, puede agregar y editar productos")
-            // }
+            if(incluirVerificacionDeRol === true && data[0].rol === 1){
+                menuActions.removeChild(document.querySelector("[href='cart.html']"))
+
+                let btnAddProd = document.createElement("button")
+                btnAddProd.classList.add("btn", "btn1")
+                btnAddProd.textContent = "Agregar producto";
+
+                btnAddProd.addEventListener("click", (e) => {
+                    modalService.modalProductAdd(e)
+                })
+
+                document.querySelector(".add-product").appendChild(btnAddProd)
+            }
 
             //Controlar que si se requiere verificar el rol, la cuenta tenga ese rol, sino mandara alerta
             if(incluirVerificacionDeRol === true && data[0].rol !== 1)
@@ -52,7 +77,7 @@ const cerrarSesion = (mensaje) => {
     }
 
     cookieService.deleteCookie("ag_user_id");
-    cookieService.deleteCookie("ag_user_id");
+    cookieService.deleteCookie("ag_user_role");
 
     cookieService.deleteCookie("ag_carrito_productos");
 
