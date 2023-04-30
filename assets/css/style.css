@@ -156,11 +156,13 @@ nav  i
 {
     color: white;
     background-color: var(--bgAlt);
+    border: 2px solid var(--bgAlt);
     align-self: center;
 }
 .btn1:hover
 {
     background-color: var(--bg3);
+    border: 2px solid var(--bg3);
 }
 .btn-link
 {
@@ -188,6 +190,7 @@ nav  i
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 /* Button ends */
 
@@ -196,7 +199,7 @@ nav  i
 {
     /* margin-top: var(--navH); */
     padding: 20px;
-    background-image: url(../image/young\ people\ on\ computer.jpg);
+    background-image: url(../image/hero.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -219,7 +222,7 @@ nav  i
     margin: 25px 0 30px 0;
     font-size: 20px;
     width: 70%;
-    color: var(--textAlt);
+    color: var(--textLight);
 }
 
 .hero-meet button
@@ -277,6 +280,14 @@ nav  i
 }
 /* Banner ends */
 
+/* Add product */
+.add-product
+{
+    width: 90%;
+    margin-bottom: 20px;
+}
+/*  */
+
 /* Product */
 .products
 {
@@ -291,7 +302,7 @@ nav  i
 {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
     flex-wrap: wrap;
     width: 90%;
 }
@@ -321,8 +332,15 @@ nav  i
 .card-pricing
 {
     display: flex;
+    width: 80%;
+    align-items: flex-start;
     flex-direction: column;
-    margin: 20px 0 20px 20px;
+    /* margin: 20px 0 20px 20px; */
+    margin: 20px auto;
+}
+.card-pricing.price-centered, .product-pricing .price-centered
+{
+    align-items: center;
 }
 .price-disc
 {
@@ -331,6 +349,14 @@ nav  i
     margin-bottom: 5px;
     color: var(--textLight);
     font-weight: lighter;
+}
+.card .card-pricing .price, .card .card-pricing .price-disc
+{
+    margin-left: 10%;
+}
+.card .card-pricing.price-centered .price
+{
+    margin-left: unset;
 }
 .disc-per
 {
@@ -396,6 +422,7 @@ footer
 {
     display: flex;
     justify-content: center;
+    margin: 15px 0;
 }
 .product-img img
 {
@@ -406,6 +433,10 @@ footer
 .product-details
 {
     width: 90%;
+}
+.product-details h2
+{
+    margin-bottom: 10px;
 }
 .product-pricing
 {
@@ -419,6 +450,11 @@ footer
 .product-pricing .price
 {
     margin-top: -15px;
+    font-size: 24px;
+}
+.product-pricing .price-disc
+{
+    font-size: 18px;
 }
 .product-pricing .price, .product-pricing .price-disc
 {
@@ -427,6 +463,12 @@ footer
 .button-actions .btn-link .btn
 {
     margin-bottom: 15px;
+}
+.button-actions .btn-link
+{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
 }
 .icon
 {
@@ -466,6 +508,12 @@ footer
     width: 95%;
     height: auto;
     min-height: 75dvh;
+}
+.cart-products.centered
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .breadcrum
 {
@@ -527,6 +575,11 @@ footer
     align-items: center;
     margin-top: 10px;
 }
+button[delid]{
+    border: none;
+    background-color: var(--bg2);
+    padding: 5px;
+}
 .cart-resume
 {
     margin: 20px 0;
@@ -569,6 +622,7 @@ footer
     border: none;
     border-bottom: 1px solid var(--det1);
     outline: none;
+    padding-bottom: 5px;
 }
 label
 {
@@ -630,7 +684,6 @@ body:has(.container-modal.toggle-modal) #btn-modal
 
 body:has(.container-modal.toggle-modal)
 {
-    background-color: red;
     overflow: hidden;
 }
 
@@ -815,6 +868,10 @@ body:has(.container-modal.toggle-modal) main
         width:45%;
     }
 
+    .button-actions .btn-link
+    {
+        display: inline;
+    }
 
     /* Cart page */
     .cart-products
